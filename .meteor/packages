@@ -19,3 +19,14 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 autopublish             # Publish all data to the clients (for prototyping)
 insecure                # Allow all DB writes from clients (for prototyping)
 react
+meyerweb-reset
+
+check
+underscore
+
+praneybehl:react-tappable
+
+verron:autosize
+
+#255kb:cordova-disable-select
+jasonford:no-body-scroll

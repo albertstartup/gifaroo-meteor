@@ -32,6 +32,7 @@ htmljs@1.0.5
 http@1.1.1
 id-map@1.0.4
 insecure@1.0.4
+jasonford:no-body-scroll@0.1.1
 jquery@1.11.4
 jsx@0.2.3
 launch-screen@1.0.4
@@ -39,6 +40,7 @@ livedata@1.0.15
 logging@1.0.8
 meteor@1.1.10
 meteor-base@1.0.1
+meyerweb-reset@1.0.4
 minifiers@1.1.7
 minimongo@1.0.10
 mobile-experience@1.0.1
@@ -48,6 +50,7 @@ mongo-id@1.0.1
 npm-mongo@1.4.39_1
 observe-sequence@1.0.7
 ordered-dict@1.0.4
+praneybehl:react-tappable@0.7.1
 promise@0.5.1
 random@1.0.5
 react@0.14.1_1
@@ -70,5 +73,6 @@ tracker@1.0.9
 ui@1.0.8
 underscore@1.0.4
 url@1.0.5
+verron:autosize@3.0.8
 webapp@1.2.3
 webapp-hashing@1.0.5
