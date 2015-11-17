@@ -12,3 +12,15 @@ changeToPostWithIndex = function(index) {
     })
   }).bind(this));
 }
+
+postGetInitialState = function() {
+  var newStyle = styles.postMedia;
+  newStyle.backgroundImage = 'url(' + 'https://i.imgur.com/zXndIUc.gif' + ')';
+  return { 
+    captionText: 'Tap me to change the caption then tap the photo to share it and see another one.\nIf you find a funny gif on another app, open their share menu and click on Gifaroo.',
+    style: newStyle,
+    nextPostIndex: 0,
+    originalCaptionText: 'please caption lol',
+    mediaUri: 'https://i.imgur.com/zXndIUc.gif'
+  }
+}
