@@ -6,12 +6,20 @@ Meteor.methods({
 
     var posts;
 
-    posts = Posts.find({_id: {$nin: ignoreIds}}).fetch();
+    posts = Posts.find({_id: {$nin: ignoreIds}}, {
+      sort: {
+        datePosted: -1
+      }
+    }).fetch();
     
     if (posts.length === 0) {
-      return {mediaUri: 'http://www.gifbin.com/bin/042009/1241026091_youve_been_rickrolled.gif',
-      captionText: 'Thats all the gifs, invite your funny friends so that you dont run out of gifs'
-      } 
+      var latestPost = Posts.find({}, {
+        sort: {
+          datePosted: -1
+        }
+      }).fetch()[0];
+      latestPost.shouldResetIgnoreIds = true;
+      return latestPost;
     } else {
       return posts[0];
     }
@@ -27,6 +35,6 @@ Meteor.methods({
     check(mediaUri, String);
     check(captionText, String);
 
-    Posts.insert({mediaUri: mediaUri, captionText: captionText || 'caption this'});
+    Posts.insert({datePosted: new Date(), mediaUri: mediaUri, captionText: captionText || 'caption this'});
   }
 });

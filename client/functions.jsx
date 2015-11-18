@@ -2,11 +2,13 @@ changePost = function() {
   Meteor.call('getPost', this.state.ignoreIds, (function (error, result) {
     console.log(error)
     var newStyle = (getNewStyleWithMediaUriAndOldStyle).bind(this)(result.mediaUri, this.state.style);
-    if (!result._id) {
-      var newIgnoreIds = this.state.ignoreIds
+
+    if (result.shouldResetIgnoreIds) {
+      var newIgnoreIds = [];
     } else {
       var newIgnoreIds = this.state.ignoreIds.concat([result._id || ''])
     }
+
     this.setState({
       captionText: result.captionText,
       style: newStyle,
@@ -27,7 +29,7 @@ getNewStyleWithMediaUriAndOldStyle = function(mediaUri, oldStyle) {
 postGetInitialState = function() {
   var newStyle = (getNewStyleWithMediaUriAndOldStyle).bind(this)('https://i.imgur.com/zXndIUc.gif', styles.postMedia);
   return { 
-    captionText: 'Tap me to change the caption then tap the photo to share it and see another one.\nPress the picture to add your own gif.',
+    captionText: 'Tap me to change the caption then tap the photo to share it and see another one.\nPress and hold the picture to add your own gif.',
     style: newStyle,
     originalCaptionText: 'Tap me to change the caption then tap the photo to share it and see another one.\nPress the picture to add your own gif.',
     mediaUri: 'https://i.imgur.com/zXndIUc.gif',
