@@ -1,28 +1,15 @@
 Post = React.createClass({
-    getInitialState() {
-      postGetInitialState();
-    },
-    componentDidMount() {
-      (changeToPostWithIndex).bind(this)(0)
-    },
-    changePost() {
-      (changeToPostWithIndex).bind(this)(this.state.nextPostIndex)
-    },
-    sharePost() {
-      if (this.state.captionText !== this.state.originalCaptionText) {
-        Meteor.call('sharePost', this.state.mediaUri, this.state.captionText);
-      };
-    },
-    captureNewCaption(event) {
-      this.setState({
-        captionText: event.target.value
-      });
-    },
-    render() {
-      return (
-        <Tappable onTap={() => {this.sharePost(); this.changePost();}} component="div" style={this.state.style}>
-        <PostCaptionBar onEditCaption={this.captureNewCaption} captionText={this.state.captionText}/>
-        </Tappable>
-        )
-    }
-  })
+  getInitialState() {
+    return postGetInitialState();
+  },
+  render() {
+    return (
+      <Tappable pressDelay={650} onPress={() => {this.setState({isAddingPostMedia: !this.state.isAddingPostMedia})}} onTap={() => {(sharePost).bind(this)(); (changePost).bind(this)();}} component="div" style={this.state.style}>
+      <PostCaptionBar onEditCaption={(captureNewCaption).bind(this)} captionText={this.state.captionText}/>
+
+      {(renderAddingPostMedia).bind(this)()}
+
+      </Tappable>
+      )
+  }
+})

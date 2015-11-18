@@ -10,4 +10,16 @@ styles = {
     backgroundColor: 'black',
     opacity: .5,
   },
+  captionBarTextarea: {
+    color: 'white',
+    backgroundColor: 'transparent',
+    border: 'none',
+    width: 95 + '%',
+    height: 20,
+    fontSize: '17',
+    paddingTop: 14 + 'px',
+    paddingBottom: 14 + 'px',
+    paddingLeft: 10 + 'px',
+    paddingRight: 10 + 'px',
+  },
 }

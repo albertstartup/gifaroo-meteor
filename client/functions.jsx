@@ -1,13 +1,20 @@
-changeToPostWithIndex = function(index) {
-  Meteor.call('getPostWithIndex', index, (function (error, result) {
+changePost = function() {
+  Meteor.call('getPost', this.state.ignoreIds, (function (error, result) {
+    console.log(error)
     var newStyle = (getNewStyleWithMediaUriAndOldStyle).bind(this)(result.mediaUri, this.state.style);
+    if (!result._id) {
+      var newIgnoreIds = this.state.ignoreIds
+    } else {
+      var newIgnoreIds = this.state.ignoreIds.concat([result._id || ''])
+    }
     this.setState({
       captionText: result.captionText,
       style: newStyle,
-      nextPostIndex: result.nextPostIndex,
       originalCaptionText: result.captionText,
       mediaUri: result.mediaUri,
-    })
+      ignoreIds: newIgnoreIds,
+      isAddingPostMedia: false,
+    });
   }).bind(this));
 };
 
@@ -20,11 +27,12 @@ getNewStyleWithMediaUriAndOldStyle = function(mediaUri, oldStyle) {
 postGetInitialState = function() {
   var newStyle = (getNewStyleWithMediaUriAndOldStyle).bind(this)('https://i.imgur.com/zXndIUc.gif', styles.postMedia);
   return { 
-    captionText: 'Tap me to change the caption then tap the photo to share it and see another one.\nIf you find a funny gif on another app, open their share menu and click on Gifaroo.',
+    captionText: 'Tap me to change the caption then tap the photo to share it and see another one.\nPress the picture to add your own gif.',
     style: newStyle,
-    nextPostIndex: 0,
-    originalCaptionText: 'please caption lol',
-    mediaUri: 'https://i.imgur.com/zXndIUc.gif'
+    originalCaptionText: 'Tap me to change the caption then tap the photo to share it and see another one.\nPress the picture to add your own gif.',
+    mediaUri: 'https://i.imgur.com/zXndIUc.gif',
+    ignoreIds: [],
+    isAddingPostMedia: false,
   }
 };
 
@@ -42,10 +50,6 @@ captureNewMediaUri = function(event) {
     mediaUri: event.target.value,
     style: newStyle
   })
-};
-
-changePost = function() {
-  (changeToPostWithIndex).bind(this)(this.state.nextPostIndex)
 };
 
 sharePost = function() {

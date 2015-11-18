@@ -9,21 +9,10 @@ PostCaptionBar = React.createClass({
   render() {
     return (
 
-      <Tappable stopPropagation={true} component="div">
+      <Tappable onTap={this.props.onTap} preventDefault={this.props.disableTextInput} stopPropagation={true} component="div">
 
       <div style={styles.captionBar}>
-      <textarea style={{
-        color: 'white',
-        backgroundColor: 'transparent',
-        border: 'none',
-        width: 95 + '%',
-        height: 20,
-        fontSize: '17',
-        paddingTop: 14 + 'px',
-        paddingBottom: 14 + 'px',
-        paddingLeft: 10 + 'px',
-        paddingRight: 10 + 'px',
-      }} onChange={this.props.onEditCaption}></textarea>
+      <textarea style={styles.captionBarTextarea} onChange={this.props.onEditCaption}></textarea>
       </div>
       </Tappable>
 
