@@ -5,6 +5,8 @@ Post = React.createClass({
         <PostBars post={this.props.post}/>
         
         <PostMedia post={this.props.post}/>
+
+        <HelpButton/>
       </div>
     );
   }

@@ -20,6 +20,5 @@ html, body, #render-target {
     width: 100%;
     font-size: 18px;
     padding: 11px;
-    position: relative;
     box-sizing: border-box;
 }

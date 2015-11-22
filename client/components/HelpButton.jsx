@@ -1,4 +1,4 @@
-PostShareNewMediaBar = React.createClass({
+HelpButton = React.createClass({
   render() {
     return (
 
@@ -6,16 +6,20 @@ PostShareNewMediaBar = React.createClass({
                 onTap={this._onTap}
                 className="postBar"
                 style={this._style}>
-        Tap anywhere to share your caption or see a new gif
+        Help Dawg!
       </Tappable>
 
       )
   },
   _onTap() {
-    console.log('tapped PostShareNewMediaBar')
+    console.log('tapped HelpButton')
     shareAndChangePost();
   },
   _style: {
-    textAlign: 'center'
+    textAlign: 'center',
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    width: 28 + '%',
   }
 })
