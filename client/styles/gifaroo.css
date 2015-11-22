@@ -1,0 +1,25 @@
+html, body, #render-target {
+	height: 100%;
+}
+
+.fullHeight {
+	height: 100%;
+}
+
+.postBars {
+    top: 0px;
+    position: absolute;
+    width: 100%;
+}
+
+.postBar {
+    background-color: black;
+    opacity: .5;
+    color: white;
+    border: none;
+    width: 100%;
+    font-size: 18px;
+    padding: 14px 11px;
+    position: relative;
+    box-sizing: border-box;
+}

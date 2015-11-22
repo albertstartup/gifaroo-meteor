@@ -326,7 +326,7 @@ module.exports = function (mixins) {
 
 		getDefaultProps: function getDefaultProps() {
 			return {
-				component: 'div',
+				component: 'span',
 				classBase: 'Tappable'
 			};
 		},
@@ -366,7 +366,7 @@ module.exports = function (mixins) {
 	});
 };
 
-window.Tappable = module.exports();
+window.Tappable = module.exports(); // Custom
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./touchStyles":4}],4:[function(require,module,exports){

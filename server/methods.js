@@ -21,19 +21,30 @@ Meteor.methods({
       latestPost.shouldResetIgnoreIds = true;
       return latestPost;
     } else {
-      return posts[0];
+      var post = posts[0];
+
+      if (posts.length === 1) {
+        post.shouldResetIgnoreIds = true;
+      }
+
+      return post;
     }
   },
   sharePost: function (mediaUri, captionText) {
     this.unblock();
 
+    check(mediaUri, String);
+    check(captionText, String);
+
     if (!mediaUri.includes('.gif')) {
       throw new Meteor.Error('media-not-gif', 'Media is not a gif');
       return;
-    }
+    } 
 
-    check(mediaUri, String);
-    check(captionText, String);
+    if (Posts.find({mediaUri: mediaUri, captionText: captionText}).count()) {
+      throw new Meteor.Error('duplicate-post', 'Post is a duplicate.');
+      return;
+    }
 
     Posts.insert({datePosted: new Date(), mediaUri: mediaUri, captionText: captionText || 'caption this'});
   }

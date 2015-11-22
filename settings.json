@@ -1,0 +1,8 @@
+// Remove private keys!
+
+// Meteor setting api
+{
+  "public": {
+
+  }
+}
