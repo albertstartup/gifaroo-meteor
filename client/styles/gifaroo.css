@@ -19,7 +19,7 @@ html, body, #render-target {
     border: none;
     width: 100%;
     font-size: 18px;
-    padding: 14px 11px;
+    padding: 11px;
     position: relative;
     box-sizing: border-box;
 }

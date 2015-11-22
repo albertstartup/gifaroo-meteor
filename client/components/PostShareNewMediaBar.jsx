@@ -6,7 +6,7 @@ PostShareNewMediaBar = React.createClass({
                 onTap={this._onTap}
                 className="postBar"
                 style={this._style}>
-        <h1>Click to Share or to See a New Gif</h1>
+        <h1>Tap anywhere to share your caption or see a new gif</h1>
       </Tappable>
 
       )
