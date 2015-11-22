@@ -1,4 +1,4 @@
-HelpButton = React.createClass({
+AddGifButton = React.createClass({
   render() {
     return (
 
@@ -6,14 +6,13 @@ HelpButton = React.createClass({
                 onTap={this._onTap}
                 className="postBar"
                 style={this._style}>
-        Help Dawg!
+        Add a GIF!
       </Tappable>
 
       )
   },
   _onTap() {
-    console.log('tapped HelpButton')
-    shareAndChangePost();
+    toggleIsAddingPostMedia()
   },
   _style: {
     textAlign: 'center',

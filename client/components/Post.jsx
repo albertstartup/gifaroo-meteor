@@ -6,7 +6,7 @@ Post = React.createClass({
         
         <PostMedia post={this.props.post}/>
 
-        <HelpButton/>
+        <AddGifButton/>
       </div>
     );
   }

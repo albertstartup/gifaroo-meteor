@@ -11,9 +11,6 @@ PostMedia = React.createClass({
   _onTap() {
     shareAndChangePost();
   },
-  _onPress() {
-    toggleIsAddingPostMedia();
-  },
   _style() {
     var height;
     var backgroundSize;
