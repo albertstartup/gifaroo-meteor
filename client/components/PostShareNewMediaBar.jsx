@@ -5,11 +5,9 @@ PostShareNewMediaBar = React.createClass({
       <Tappable component="div"
                 onTap={this._onTap}
                 className="postBar"
-                style={this._style}>
-        Tap anywhere to share your caption or see a new gif
-      </Tappable>
+                style={this._style}>{this._copy()}</Tappable>
 
-      )
+      );
   },
   _onTap() {
     console.log('tapped PostShareNewMediaBar')
@@ -17,5 +15,12 @@ PostShareNewMediaBar = React.createClass({
   },
   _style: {
     textAlign: 'center'
+  },
+  _copy() {
+    if (this.props.post.isAddingPostMedia) {
+      return 'Tap here to share your new gif and caption'
+    } else {
+      return 'Tap anywhere to share your caption or see a new gif'
+    }
   }
 })

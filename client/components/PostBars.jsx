@@ -6,14 +6,15 @@ PostBars = React.createClass({
 
         {() => {
           if (this.props.post.isAddingPostMedia) {
-            return (
-              <span>
-                <PostAddMediaBar post={this.props.post}/>
-              </span>
-            );
+            return (<PostAddMediaBar post={this.props.post}/>);
           }
         }()}
-        <PostShareNewMediaBar/>
+
+        {() => {
+          if (this.props.post.shouldShowShareNewMediaBar) {
+            return (<PostShareNewMediaBar post={this.props.post}/>);
+          }
+        }()}
       </div>
     );
 	}

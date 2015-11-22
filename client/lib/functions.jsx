@@ -21,7 +21,18 @@ changePost = function() {
       console.log('getPost error: ', error)
     }
   });
+
+  adjustShouldShowSharePostBar();
 };
+
+adjustShouldShowSharePostBar = function() {
+  Session.set('timesChangedPost',
+    (Session.get('timesChangedPost') || 0) +1);
+
+  if (Session.get('timesChangedPost') >= 3) {
+    AppState.set('post.shouldShowShareNewMediaBar', false);
+  }
+}
 
 shareAndChangePost = function() {
   sharePost();
@@ -43,4 +54,5 @@ isPostDifferent = function() {
 
 toggleIsAddingPostMedia = function() {
   AppState.set('post.isAddingPostMedia', !AppState.get('post.isAddingPostMedia'));
+  AppState.set('post.shouldShowShareNewMediaBar', true);
 };
