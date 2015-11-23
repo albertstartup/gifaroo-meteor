@@ -7,6 +7,14 @@ Post = React.createClass({
         <PostMedia post={this.props.post}/>
 
         <AddGifButton post={this.props.post}/>
+
+        {() => {
+          if (isAcceptableVideoUri(this.props.post.newMediaUri)) {
+            return (
+              <ReplayVideoButton/>
+            )
+          }
+        }()}
       </div>
     );
   }

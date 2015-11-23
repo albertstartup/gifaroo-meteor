@@ -15,7 +15,7 @@ PostCaptionBar = React.createClass({
   render() {
     return (
 
-      <textarea className="postBar"
+      <textarea spellCheck="false" className="postBar"
                 onChange={this._onEditCaption}
                 value={this.props.post.newCaptionText}>
       </textarea>

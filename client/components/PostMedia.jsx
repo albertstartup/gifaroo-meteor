@@ -17,8 +17,8 @@ PostMedia = React.createClass({
 
                   {() => {
                     if (isAcceptableVideoUri(this.props.post.newMediaUri)) {
-                      return (<video style={this._containedStyle}
-                      src={this.props.post.newMediaUri} muted="muted" autoPlay preload="auto" loop="loop"
+                      return (<video id="postVideo" style={this._containedStyle}
+                      src={this.props.post.newMediaUri} autoPlay preload="auto" loop="loop"
                       ref={this._attachCustomAttributes}
                       ></video>);
                     } else if (isAcceptableImageUri(this.props.post.newMediaUri)) {

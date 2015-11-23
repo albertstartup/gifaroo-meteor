@@ -8,7 +8,7 @@ PostAddMediaBar = React.createClass({
   render() {
     return (
 
-      <textarea className="postBar"
+      <textarea spellCheck="false" className="postBar"
                 onChange={this._onEditPostMediaUri}
                 value={this.props.post.newMediaUri}>
       </textarea>
