@@ -27,20 +27,20 @@ PostMedia = React.createClass({
     var height;
     var marginTop;
     
-    var completeStyle = {}; 
+    var style = {
+      height: 100 + '%',
+      boxSizing: 'border-box',
+    }; 
 
     if (this.props.post.isAddingPostMedia) {
-      height = 75 + '%';
-      marginTop = 50 + '%';
+      paddingTop = 50 + '%';
     } else {
-      height = 100 + '%';
-      marginTop = 0;
+      paddingTop = 0;
     }
 
-    completeStyle.height = height;
-    completeStyle.marginTop = marginTop
+    style.paddingTop = paddingTop;
 
-    return completeStyle;
+    return style;
   },
   _containedStyle: {
     height: 100 + '%',
