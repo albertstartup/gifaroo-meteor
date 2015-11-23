@@ -10,7 +10,9 @@ PostMedia = React.createClass({
                   {() => {
                     if (isAcceptableVideoUri(this.props.post.newMediaUri)) {
                       return (<video style={this._containedStyle}
-                      src={this.props.post.newMediaUri} autoPlay loop="loop"></video>);
+                      src={this.props.post.newMediaUri} muted="muted" autoPlay preload="auto" loop="loop"
+                      ref={this._attachCustomAttributes}
+                      ></video>);
                     } else if (isAcceptableImageUri(this.props.post.newMediaUri)) {
                       return (<img style={this._containedStyle}
                       src={this.props.post.newMediaUri}></img>)
@@ -46,5 +48,10 @@ PostMedia = React.createClass({
     height: 100 + '%',
     width: 100 + '%',
     objectFit: 'contain'
+  },
+  _attachCustomAttributes(domNode) {
+    if (domNode) {
+      domNode.setAttribute('webkit-playsinline', 'true');
+    }
   }
 });
