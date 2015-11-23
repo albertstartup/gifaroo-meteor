@@ -1,3 +1,5 @@
 Meteor.startup(function() {
-  ReactDOM.render(<App/>, document.getElementById('render-target'));
+  changePost(() => {
+    ReactDOM.render(<App/>, document.getElementById('render-target'))
+  });
 });

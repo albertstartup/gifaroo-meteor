@@ -4,31 +4,57 @@ Meteor.methods({
 
     check(ignoreIds, [String]);
 
-    var posts;
+    var postToSend;
 
-    posts = Posts.find({_id: {$nin: ignoreIds}}, {
+    var filteredPosts;
+
+    var unFilteredPosts = Posts.find({}, {
       sort: {
         datePosted: -1
       }
     }).fetch();
-    
-    if (posts.length === 0) {
-      var latestPost = Posts.find({}, {
-        sort: {
-          datePosted: -1
-        }
-      }).fetch()[0];
-      latestPost.shouldResetIgnoreIds = true;
-      return latestPost;
-    } else {
-      var post = posts[0];
 
-      if (posts.length === 1) {
-        post.shouldResetIgnoreIds = true;
+    if (!unFilteredPosts.length) {
+      throw new Meteor.Error('no-posts', 'There are no Posts.');
+      return;
+    }
+
+    filteredPosts = _.reject(unFilteredPosts, function(post) {
+      var _index = _.indexOf(ignoreIds, post._id);
+      if (_index === -1) {
+        return false
+      } else {
+        return true
+      }
+    });
+    
+    if (filteredPosts.length === 0) {
+      postToSend= unFilteredPosts[0];
+
+      postToSend.shouldResetIgnoreIds = true;
+
+    } else {
+      postToSend = filteredPosts[0];
+
+      if (filteredPosts.length === 1) {
+        postToSend.shouldResetIgnoreIds = true;
       }
 
-      return post;
     }
+
+    if (unFilteredPosts.length > 1) {
+      if (filteredPosts.length > 1) {
+        if (isAcceptableImageUri(filteredPosts[1].mediaUri)) {
+          postToSend.suggestedPreloadImageUri = filteredPosts[1].mediaUri;
+        }
+      } else {
+        if (isAcceptableImageUri(unFilteredPosts[1].mediaUri)) {
+          postToSend.suggestedPreloadImageUri = unFilteredPosts[1].mediaUri;
+        }
+      }
+    }
+
+    return postToSend;
   },
   sharePost: function (mediaUri, captionText) {
     this.unblock();

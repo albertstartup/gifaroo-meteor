@@ -1,4 +1,12 @@
 PostMedia = React.createClass({
+  componentWillUpdate(nextProps) {
+    var imgEl;
+    if (isAcceptableImageUri(nextProps.post.newMediaUri)) {
+      imgEl = $(ReactDOM.findDOMNode(this)).find('img').first()
+      imgEl.attr('src', '');
+      imgEl.attr('src', nextProps.post.newMediaUri);
+    }
+  },
   render() {
     return (
         <Tappable pressDelay={650}

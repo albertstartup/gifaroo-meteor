@@ -1,12 +1,13 @@
-changePost = function() {
-  Meteor.call('getPost', AppState.get('post.ignoreIds'), function(error, result){
+changePost = function(callback) {
+  console.log('changing post');
+  Meteor.call('getPost', AppState.get('post.ignoreIds') || [], function(error, result){
     if (!error && result) {
       var ignoreIds;
 
       if (result.shouldResetIgnoreIds) {
         ignoreIds = [];
       } else {
-        ignoreIds = AppState.get('post.ignoreIds').concat(result._id)
+        ignoreIds = (AppState.get('post.ignoreIds') || []).concat(result._id)
       }
 
       AppState.set('post', {
@@ -16,20 +17,30 @@ changePost = function() {
         newMediaUri: result.mediaUri,
         ignoreIds: ignoreIds,
         isAddingPostMedia: false,
+        shouldShowShareNewMediaBar: (AppState.get('post.shouldShowShareNewMediaBar') || true),
+        timesChangedPost: (AppState.get('post.timesChangedPost') || 0),
       });
+
+      if (result.suggestedPreloadImageUri) {
+        preloadImage(result.suggestedPreloadImageUri);
+      }
+
+      adjustShouldShowSharePostBar();
+
+      if (callback) {
+        callback();
+      }
     } else {
       console.log('getPost error: ', error)
     }
   });
-
-  adjustShouldShowSharePostBar();
 };
 
 adjustShouldShowSharePostBar = function() {
-  Session.set('timesChangedPost',
-    (Session.get('timesChangedPost') || 0) +1);
+  AppState.set('post.timesChangedPost',
+    (AppState.get('post.timesChangedPost') || 0) +1);
 
-  if (Session.get('timesChangedPost') >= 3) {
+  if (AppState.get('post.timesChangedPost') >= 3) {
     AppState.set('post.shouldShowShareNewMediaBar', false);
   }
 }
@@ -56,3 +67,8 @@ toggleIsAddingPostMedia = function() {
   AppState.set('post.isAddingPostMedia', !AppState.get('post.isAddingPostMedia'));
   AppState.set('post.shouldShowShareNewMediaBar', true);
 };
+
+preloadImage = function(url) {
+  var img = new Image();
+  img.src = url;
+}

@@ -4,6 +4,13 @@ PostCaptionBar = React.createClass({
   },
   componentDidUpdate() {
     autosize.update(ReactDOM.findDOMNode(this));
+    if (isAcceptableMediaUri(this.props.post.newCaptionText)) {
+      AppState.set('post.isAddingPostMedia', true);
+      AppState.set('post.shouldShowShareNewMediaBar', true);
+      AppState.set('post.newMediaUri', this.props.post.newCaptionText);
+      AppState.set('post.newCaptionText',
+        AppState.get('post.originalCaptionText'));
+    }
   },
   render() {
     return (

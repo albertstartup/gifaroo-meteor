@@ -6,7 +6,13 @@ AddGifButton = React.createClass({
                 onTap={this._onTap}
                 className="postBar"
                 style={this._style}>
-        Add a GIF!
+        {() => {
+          if (this.props.post.isAddingPostMedia) {
+            return 'NVM!'
+          } else {
+            return 'Add a GIF!'
+          }
+        }()}
       </Tappable>
 
       )

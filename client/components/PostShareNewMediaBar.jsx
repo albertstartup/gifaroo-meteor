@@ -10,7 +10,6 @@ PostShareNewMediaBar = React.createClass({
       );
   },
   _onTap() {
-    console.log('tapped PostShareNewMediaBar')
     shareAndChangePost();
   },
   _style: {
@@ -18,7 +17,7 @@ PostShareNewMediaBar = React.createClass({
   },
   _copy() {
     if (this.props.post.isAddingPostMedia) {
-      return 'Tap here to share your new gif and caption'
+      return 'Tap anywhere to share your new gif and caption'
     } else {
       return 'Tap anywhere to share your caption or see a new gif'
     }

@@ -5,9 +5,6 @@ App = React.createClass({
       post: AppState.get('post')
     };  
   },
-  componentDidMount() {
-    changePost();
-  },
   render() {
     return <Post post={this.data.post}/>
   }

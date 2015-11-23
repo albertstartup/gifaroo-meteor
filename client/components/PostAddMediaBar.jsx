@@ -3,7 +3,7 @@ PostAddMediaBar = React.createClass({
     autosize(ReactDOM.findDOMNode(this));
   },
   componentDidUpdate() {
-    autosize(ReactDOM.findDOMNode(this));
+    autosize.update(ReactDOM.findDOMNode(this));
   },
   render() {
     return (
