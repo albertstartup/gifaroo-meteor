@@ -36,10 +36,19 @@ Meteor.methods({
     check(mediaUri, String);
     check(captionText, String);
 
-    if (!mediaUri.includes('.gif')) {
-      throw new Meteor.Error('media-not-gif', 'Media is not a gif');
+    if (mediaUri.includes('.gifv')) {
+      mediaUri = mediaUri.replace('.gifv', '.mp4');
+    }
+
+    if (!isAcceptableMediaUri(mediaUri)) {
+      throw new Meteor.Error('media-uri-not-acceptable', 'Media Uri is not acceptable');
       return;
-    } 
+    }
+
+    if (!captionText) {
+      throw new Meteor.Error('caption-empty', 'Caption can not be empty');
+      return;
+    }
 
     if (Posts.find({mediaUri: mediaUri, captionText: captionText}).count()) {
       throw new Meteor.Error('duplicate-post', 'Post is a duplicate.');

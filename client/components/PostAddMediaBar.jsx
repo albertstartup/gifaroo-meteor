@@ -16,6 +16,14 @@ PostAddMediaBar = React.createClass({
     );
   },
   _onEditPostMediaUri(event) {
-    AppState.set('post.newMediaUri', event.target.value);
+    var newValue;
+
+    if (event.target.value.includes('.gifv')) {
+      newValue = event.target.value.replace('.gifv', '.mp4');
+    } else {
+      newValue = null;
+    }
+
+    AppState.set('post.newMediaUri', newValue || event.target.value);
   }
 })
