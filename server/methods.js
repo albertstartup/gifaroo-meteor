@@ -62,6 +62,11 @@ Meteor.methods({
     check(mediaUri, String);
     check(captionText, String);
 
+    if (!mediaUri.includes('http://') || !mediaUri.includes('https://')) {
+      var defaultProtocol = 'http://';
+      defaultProtocol.concat(mediaUri);
+    }
+
     if (mediaUri.includes('.gifv')) {
       mediaUri = mediaUri.replace('.gifv', '.mp4');
     }
