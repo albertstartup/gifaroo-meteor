@@ -24,6 +24,8 @@ PostAddMediaBar = React.createClass({
       newValue = null;
     }
 
+    newValue = addProtocol(newValue || event.target.value);
+
     AppState.set('post.newMediaUri', newValue || event.target.value);
   }
 })
